@@ -12,8 +12,6 @@
  * @since         0.10.0
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-
-$cakeDescription = 'CakePHP: the rapid development php framework';
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,31 +19,73 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
+    <script
+        src="https://code.jquery.com/jquery-3.1.1.js"
+        integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+        crossorigin="anonymous"></script>
 
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('cake.css') ?>
+    <?= $this->Html->css('bootstrap.min.css') ?>
+    <?= $this->Html->css('bootstrap-theme.min.css') ?>
+    <?= $this->Html->script('bootstrap.min.js') ?>
+
+    <?= $this->Html->script('jquery.js') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <nav class="top-bar expanded" data-topbar role="navigation">
-        <ul class="title-area large-3 medium-4 columns">
-            <li class="name">
-                <h1><a href=""><?= $this->fetch('title') ?></a></h1>
+    <nav class="navbar navbar-inverse navbar-static-top" data-topbar role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Home</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">News <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><?= $this->Html->link('News',['controller'=>'news','action'=>'index']) ?></li>
+                    <li><?= $this->Html->link('Ajouter News',['controller'=>'news','action'=>'add']) ?></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Utilisateur <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><?= $this->Html->link('Utilisateur',['controller'=>'users','action'=>'index']) ?></li>
+                    <li><?= $this->Html->link('Ajouter Utilisateur',['controller'=>'users','action'=>'add']) ?></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Category <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><?= $this->Html->link('Category',['controller'=>'categories','action'=>'index']) ?></li>
+                    <li><?= $this->Html->link('Ajouter Category',['controller'=>'categories','action'=>'add']) ?></li>
+                </ul>
             </li>
         </ul>
-        <div class="top-bar-section">
-            <ul class="right">
-                <li><a target="_blank" href="http://book.cakephp.org/3.0/">Documentation</a></li>
-                <li><a target="_blank" href="http://api.cakephp.org/3.0/">API</a></li>
-            </ul>
-        </div>
+            <ul class="nav navbar-nav navbar-right">
+                <?php $Ses = $this->request->session()->read('Auth');
+                if (!empty($Ses)): ?>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $this->request->session()->read('Auth')['User']['username'] ?> <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'view', $this->request->session()->read('Auth')['User']['id']]) ?>">Mon Compte</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'logout']) ?>">Logout</a></li>
+                        </ul>
+                    </li>
+                <?php else: ?>
+                    <li><a href="<?= $this->Url->build(['controller'=>'users','action'=>'logout']) ?>">Connexion</a></li>
+                <?php endif;?>
+        </ul>
     </nav>
     <?= $this->Flash->render() ?>
     <div class="container clearfix">

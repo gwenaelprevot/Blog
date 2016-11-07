@@ -5,6 +5,10 @@
         <li><?= $this->Form->postLink(__('Delete News'), ['action' => 'delete', $news->id], ['confirm' => __('Are you sure you want to delete # {0}?', $news->id)]) ?> </li>
         <li><?= $this->Html->link(__('List News'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New News'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Categories'), ['controller' => 'Categories', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Category'), ['controller' => 'Categories', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="news view large-9 medium-8 columns content">
@@ -15,16 +19,16 @@
             <td><?= h($news->title) ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('User') ?></th>
+            <td><?= $news->has('user') ? $this->Html->link($news->user->id, ['controller' => 'Users', 'action' => 'view', $news->user->id]) : '' ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($news->id) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('User Id') ?></th>
-            <td><?= $this->Number->format($news->user_id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Category Id') ?></th>
-            <td><?= $this->Number->format($news->category_id) ?></td>
+            <th scope="row"><?= __('Categorie Id') ?></th>
+            <td><?= $this->Number->format($news->categorie_id) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Is Active') ?></th>

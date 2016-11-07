@@ -18,6 +18,9 @@ class NewsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Users', 'Categories']
+        ];
         $news = $this->paginate($this->News);
 
         $this->set(compact('news'));
@@ -34,7 +37,7 @@ class NewsController extends AppController
     public function view($id = null)
     {
         $news = $this->News->get($id, [
-            'contain' => []
+            'contain' => ['Users', 'Categories']
         ]);
 
         $this->set('news', $news);
@@ -59,7 +62,9 @@ class NewsController extends AppController
                 $this->Flash->error(__('The news could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('news'));
+        $users = $this->News->Users->find('list', ['limit' => 200]);
+        $categories = $this->News->Categories->find('list', ['limit' => 200]);
+        $this->set(compact('news', 'users', 'categories'));
         $this->set('_serialize', ['news']);
     }
 
@@ -85,7 +90,9 @@ class NewsController extends AppController
                 $this->Flash->error(__('The news could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('news'));
+        $users = $this->News->Users->find('list', ['limit' => 200]);
+        $categories = $this->News->Categories->find('list', ['limit' => 200]);
+        $this->set(compact('news', 'users', 'categories'));
         $this->set('_serialize', ['news']);
     }
 

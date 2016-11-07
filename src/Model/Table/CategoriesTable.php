@@ -7,9 +7,7 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Categorys Model
- *
- * @property \Cake\ORM\Association\HasMany $News
+ * Categories Model
  *
  * @method \App\Model\Entity\Category get($primaryKey, $options = [])
  * @method \App\Model\Entity\Category newEntity($data = null, array $options = [])
@@ -19,7 +17,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Category[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Category findOrCreate($search, callable $callback = null)
  */
-class CategorysTable extends Table
+class CategoriesTable extends Table
 {
 
     /**
@@ -32,13 +30,9 @@ class CategorysTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('categorys');
+        $this->table('categories');
         $this->displayField('name');
         $this->primaryKey('id');
-
-        $this->hasMany('News', [
-            'foreignKey' => 'category_id'
-        ]);
     }
 
     /**

@@ -42,7 +42,7 @@ class NewsTable extends Table
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Categories', [
-            'foreignKey' => 'category_id',
+            'foreignKey' => 'categorie_id',
             'joinType' => 'INNER'
         ]);
     }
@@ -85,7 +85,7 @@ class NewsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
-        $rules->add($rules->existsIn(['category_id'], 'Categories'));
+        $rules->add($rules->existsIn(['categorie_id'], 'Categories'));
 
         return $rules;
     }

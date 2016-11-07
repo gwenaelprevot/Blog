@@ -7,10 +7,10 @@
                 ['confirm' => __('Are you sure you want to delete # {0}?', $category->id)]
             )
         ?></li>
-        <li><?= $this->Html->link(__('List Categorys'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Categories'), ['action' => 'index']) ?></li>
     </ul>
 </nav>
-<div class="categorys form large-9 medium-8 columns content">
+<div class="categories form large-9 medium-8 columns content">
     <?= $this->Form->create($category) ?>
     <fieldset>
         <legend><?= __('Edit Category') ?></legend>

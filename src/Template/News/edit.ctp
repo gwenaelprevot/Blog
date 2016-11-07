@@ -8,6 +8,10 @@
             )
         ?></li>
         <li><?= $this->Html->link(__('List News'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Categories'), ['controller' => 'Categories', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Category'), ['controller' => 'Categories', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="news form large-9 medium-8 columns content">
@@ -17,8 +21,8 @@
         <?php
             echo $this->Form->input('title');
             echo $this->Form->input('content');
-            echo $this->Form->input('user_id');
-            echo $this->Form->input('category_id');
+            echo $this->Form->input('user_id', ['options' => $users]);
+            echo $this->Form->input('categorie_id');
             echo $this->Form->input('is_active');
         ?>
     </fieldset>

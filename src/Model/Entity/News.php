@@ -10,8 +10,11 @@ use Cake\ORM\Entity;
  * @property string $title
  * @property string $content
  * @property int $user_id
- * @property int $category_id
+ * @property int $categorie_id
  * @property int $is_active
+ *
+ * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\Category $category
  */
 class News extends Entity
 {

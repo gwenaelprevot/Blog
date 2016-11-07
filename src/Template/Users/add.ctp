@@ -11,6 +11,7 @@
         <?php
             echo $this->Form->input('firstname');
             echo $this->Form->input('lastname');
+        echo $this->Form->input('username');
             echo $this->Form->input('is_admin');
             echo $this->Form->input('password');
             echo $this->Form->input('avatar');
