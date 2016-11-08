@@ -16,13 +16,17 @@ class NewsController extends AppController
      *
      * @return \Cake\Network\Response|null
      */
-    public function index()
+    public function index($id = NULL)
     {
+        $users = $this->Auth->User('id');
         $this->paginate = [
             'contain' => ['Users', 'Categories']
         ];
-        $news = $this->paginate($this->News);
-
+        if (isset($id)=== false) {
+            $news = $this->paginate($this->News->find('all')->where(['is_active' => '1']));
+        } else {
+            $news = $this->paginate($this->News->find('all')->where(['user_id' => $users])->andWhere(['is_active' => '0']));
+        }
         $this->set(compact('news'));
         $this->set('_serialize', ['news']);
     }
@@ -51,19 +55,18 @@ class NewsController extends AppController
      */
     public function add()
     {
+        $users = $this->Auth->User('id');
         $news = $this->News->newEntity();
         if ($this->request->is('post')) {
             $news = $this->News->patchEntity($news, $this->request->data);
+            $news->user_id = $users;
             if ($this->News->save($news)) {
-                $this->Flash->success(__('The news has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The news could not be saved. Please, try again.'));
             }
         }
-        $users = $this->News->Users->find('list', ['limit' => 200]);
-        $categories = $this->News->Categories->find('list', ['limit' => 200]);
+        $users = $this->News->Users->find('list', ['valueField' => 'username']);
+        $categories = $this->News->Categories->find('list', ['valueField' => 'name']);
         $this->set(compact('news', 'users', 'categories'));
         $this->set('_serialize', ['news']);
     }
@@ -83,11 +86,9 @@ class NewsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $news = $this->News->patchEntity($news, $this->request->data);
             if ($this->News->save($news)) {
-                $this->Flash->success(__('The news has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The news could not be saved. Please, try again.'));
             }
         }
         $users = $this->News->Users->find('list', ['limit' => 200]);

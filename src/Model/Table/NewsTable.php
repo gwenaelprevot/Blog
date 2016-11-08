@@ -68,9 +68,7 @@ class NewsTable extends Table
             ->notEmpty('content');
 
         $validator
-            ->integer('is_active')
-            ->requirePresence('is_active', 'create')
-            ->notEmpty('is_active');
+            ->integer('is_active');
 
         return $validator;
     }

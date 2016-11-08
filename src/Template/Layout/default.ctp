@@ -37,8 +37,9 @@
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
-<body>
-    <nav class="navbar navbar-inverse navbar-static-top" data-topbar role="navigation">
+<body style="padding-top: 70px;" }>
+    <nav class="navbar navbar-inverse navbar-fixed-top" data-topbar role="navigation">
+        <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
@@ -46,8 +47,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Home</a>
         </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">News <span class="caret"></span></a>
@@ -78,6 +79,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $this->request->session()->read('Auth')['User']['username'] ?> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'view', $this->request->session()->read('Auth')['User']['id']]) ?>">Mon Compte</a></li>
+                            <li><a href="<?= $this->Url->build(['controller' => 'news', 'action' => 'index', $this->request->session()->read('Auth')['User']['id']]) ?>">Mes Brouillon</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'logout']) ?>">Logout</a></li>
                         </ul>
@@ -86,9 +88,11 @@
                     <li><a href="<?= $this->Url->build(['controller'=>'users','action'=>'logout']) ?>">Connexion</a></li>
                 <?php endif;?>
         </ul>
+        </div>
+        </div>
     </nav>
     <?= $this->Flash->render() ?>
-    <div class="container clearfix">
+    <div class="container clearfix ">
         <?= $this->fetch('content') ?>
     </div>
     <footer>
