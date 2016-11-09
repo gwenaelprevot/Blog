@@ -7,20 +7,20 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * News Model
+ * Coments Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Users
- * @property \Cake\ORM\Association\BelongsTo $Categories
+ * @property \Cake\ORM\Association\BelongsTo $News
  *
- * @method \App\Model\Entity\News get($primaryKey, $options = [])
- * @method \App\Model\Entity\News newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\News[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\News|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\News patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\News[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\News findOrCreate($search, callable $callback = null)
+ * @method \App\Model\Entity\Coment get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Coment newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Coment[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Coment|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Coment patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Coment[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Coment findOrCreate($search, callable $callback = null)
  */
-class NewsTable extends Table
+class ComentsTable extends Table
 {
 
     /**
@@ -33,16 +33,16 @@ class NewsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('news');
-        $this->displayField('title');
+        $this->table('coments');
+        $this->displayField('id');
         $this->primaryKey('id');
 
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('Categories', [
-            'foreignKey' => 'categorie_id',
+        $this->belongsTo('News', [
+            'foreignKey' => 'new_id',
             'joinType' => 'INNER'
         ]);
     }
@@ -60,17 +60,8 @@ class NewsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('title', 'create')
-            ->notEmpty('title');
-
-        $validator
             ->requirePresence('content', 'create')
             ->notEmpty('content');
-
-        $validator
-            ->integer('is_active')
-            ->requirePresence('is_active', 'create')
-            ->notEmpty('is_active');
 
         return $validator;
     }
@@ -85,7 +76,7 @@ class NewsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
-        $rules->add($rules->existsIn(['categorie_id'], 'Categories'));
+        $rules->add($rules->existsIn(['new_id'], 'News'));
 
         return $rules;
     }

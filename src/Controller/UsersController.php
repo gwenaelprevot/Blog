@@ -55,16 +55,23 @@ class UsersController extends AppController
     public function add()
     {
         $user = $this->Users->newEntity();
-        if ($this->request->is('post')) {
-            $user = $this->Users->patchEntity($user, $this->request->data);
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
-            }
+        if ($this->request->is('post')) {
+
+            $user = $this->Users->patchEntity($user, $this->request->data);
+            $this->Users->save($user);
+
+            $picture = $this->Upload->getPicture($this->request->data['avatar'],'user',$user->id, 300, 300, false);
+            $this->request->data['avatar'] = $picture;
+
+            $user = $this->Users->patchEntity($user, $this->request->data);
+            $this->Users->save($user);
+
+
+            return $this->redirect(['action' => 'view',$user->id]);
+
         }
+
         $this->set(compact('user'));
         $this->set('_serialize', ['user']);
     }
@@ -83,13 +90,17 @@ class UsersController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->data);
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+            $this->Users->save($user);
 
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
-            }
+            $picture = $this->Upload->getPicture($this->request->data['avatar'],'user',$user->id, 300, 300, false);
+            $this->request->data['avatar'] = $picture;
+
+            $user = $this->Users->patchEntity($user, $this->request->data);
+            $this->Users->save($user);
+
+
+            return $this->redirect(['action' => 'view',$user->id]);
+
         }
         $this->set(compact('user'));
         $this->set('_serialize', ['user']);

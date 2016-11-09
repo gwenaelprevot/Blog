@@ -13,17 +13,5 @@
         echo $this->Form->input('is_active',['type'=>'checkbox','class'=>'checkbox','label'=>'Publier']);
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Envoyer'),['class'=>' btn btn-primary']) ?>
+    <?= $this->Form->button(__('Envoyer'),['class'=>' btn btn-primary pull-right']) ?>
     <?= $this->Form->end() ?>
-<style>
-    .btn-striped-danger{
-        border-left: solid 2px red;
-        background-color: darkgrey;
-        color: white;
-        border-radius: 0px;
-    }
-    .btn-striped-danger:hover{
-        background-color: grey;
-    }
-
-</style>

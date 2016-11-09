@@ -1,34 +1,38 @@
-
-        <legend><?= h($news->title) ?>
-            <?= $this->Html->link(__('Edit News'), ['action' => 'edit', $news->id],['class'=>'btn btn-striped-success'] )?>
-            <?= $this->Form->postLink(__('Delete News'), ['action' => 'delete', $news->id], ['confirm' => __('Are you sure you want to delete # {0}?', $news->id),'class'=>'btn btn-striped-danger']) ?>
-        </legend>
-        <p><?= __('Titre: ') ?><?= h($news->title) ?></p>
-        <p><?= __('Username: ') ?><?= $news->has('user') ? $this->Html->link($news->user->username, ['controller' => 'Users', 'action' => 'view', $news->user->id]) : '' ?></p>
-        <p><?= __('Categorie: ') ?><?= $news->has('category') ? h($news->category->name) : '' ?></p>
-        <p><?= __('Publier: ') ?><?= $this->Number->format($news->is_active) ?></p>
+<div class="news view large-9 medium-8 columns content">
+    <legend><?= h($news->title) ?></legend>
+    <table class="vertical-table">
+        <tr>
+            <th scope="row"><?= __('Title: ') ?></th>
+            <td><?= h($news->title) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('User: ') ?></th>
+            <td><?= $news->has('user') ? $this->Html->link($news->user->id, ['controller' => 'Users', 'action' => 'view', $news->user->id]) : '' ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Category: ') ?></th>
+            <td><?= $news->has('category') ? $this->Html->link($news->category->name, ['controller' => 'Categories', 'action' => 'view', $news->category->id]) : '' ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Is Active: ') ?></th>
+            <td><?= $news->is_active ? __('Oui'):__('Non'); ?></td>
+        </tr>
+    </table>
     <div class="row">
         <h4><?= __('Content') ?></h4>
         <?= $this->Text->autoParagraph(h($news->content)); ?>
     </div>
-        <style>
-            .btn-striped-danger{
-                border-left: solid 2px red;
-                background-color: darkgrey;
-                color: white;
-                border-radius: 0px;
-            }
-            .btn-striped-danger:hover{
-                background-color: grey;
-            }
-            .btn-striped-success{
-                border-left: solid 2px #10ff00;
-                background-color: darkgrey;
-                color: white;
-                border-radius: 0px;
-            }
-            .btn-striped-success:hover{
-                background-color: grey;
-            }
+    <legend>Comentaire</legend>
 
-        </style>
+    <?php foreach ($com as $coms): ?>
+        <div class="well">
+        <p><?= $coms->content ?></p>
+        <p><?= $coms->has('user') ? $this->Html->link($news->user->username, ['controller' => 'Users', 'action' => 'view', $news->user->id],['class'=>'pull-right']) : '' ?></p>
+        </div>
+    <?php endforeach;?>
+
+    <div class="com"></div>
+</div>
+<script>
+    $('.com').load('/coments/add/<?= $news->id ?>');
+</script>

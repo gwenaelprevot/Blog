@@ -17,7 +17,7 @@ class UploadComponent extends Component
         // define new file name
         $file_newName = strtolower($directory).'-'.$id.'.'.$file_extension;
         // upload
-        $path = WWW_ROOT . '/uploads/'.strtolower($directory).'/' . $file_newName;
+        $path = WWW_ROOT . '/upload/'.strtolower($directory).'/' . $file_newName;
         if(move_uploaded_file($upload['tmp_name'], $path))
         {
             if($fit)

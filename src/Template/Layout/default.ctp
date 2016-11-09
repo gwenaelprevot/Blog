@@ -29,8 +29,9 @@
 
     <?= $this->Html->css('bootstrap.min.css') ?>
     <?= $this->Html->css('bootstrap-theme.min.css') ?>
+    <?= $this->Html->css('style.css') ?>
     <?= $this->Html->script('bootstrap.min.js') ?>
-
+    <?= $this->Html->script('html5.image.preview.min') ?>
     <?= $this->Html->script('jquery.js') ?>
 
     <?= $this->fetch('meta') ?>
@@ -69,6 +70,12 @@
                 <ul class="dropdown-menu">
                     <li><?= $this->Html->link('Category',['controller'=>'categories','action'=>'index']) ?></li>
                     <li><?= $this->Html->link('Ajouter Category',['controller'=>'categories','action'=>'add']) ?></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Commentaire <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><?= $this->Html->link('Commentaire',['controller'=>'coments','action'=>'index']) ?></li>
                 </ul>
             </li>
         </ul>

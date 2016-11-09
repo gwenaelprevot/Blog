@@ -18,15 +18,18 @@ class NewsController extends AppController
      */
     public function index($id = NULL)
     {
-        $users = $this->Auth->User('id');
+/*        $users = $this->Auth->User('id');*/
+
         $this->paginate = [
             'contain' => ['Users', 'Categories']
         ];
-        if (isset($id)=== false) {
+
+/*        if (isset($id)=== false) {
             $news = $this->paginate($this->News->find('all')->where(['is_active' => '1']));
         } else {
             $news = $this->paginate($this->News->find('all')->where(['user_id' => $users])->andWhere(['is_active' => '0']));
-        }
+        }*/
+        $news = $this->paginate($this->News);
         $this->set(compact('news'));
         $this->set('_serialize', ['news']);
     }
@@ -40,11 +43,13 @@ class NewsController extends AppController
      */
     public function view($id = null)
     {
+        $this->loadModel('Coments');
         $news = $this->News->get($id, [
             'contain' => ['Users', 'Categories']
         ]);
-
+        $com = $this->Coments->find('all')->contain('Users')->where(['new_id'=> $id]);
         $this->set('news', $news);
+        $this->set(compact('com'));
         $this->set('_serialize', ['news']);
     }
 

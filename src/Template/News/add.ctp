@@ -9,6 +9,6 @@
             echo $this->Form->input('is_active',['type'=>'checkbox','class'=>'checkbox','label'=>'Publier']);
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Envoyer'),['class'=>' btn btn-primary']) ?>
+    <?= $this->Form->button(__('Envoyer'),['class'=>' btn btn-primary pull-right']) ?>
     <?= $this->Form->end() ?>
 </div>

@@ -1,0 +1,18 @@
+.btn-striped-danger{
+    border-left: solid 2px red;
+    background-color: darkgrey;
+    color: white;
+    border-radius: 0px;
+}
+.btn-striped-danger:hover{
+    background-color: grey;
+}
+.btn-striped-success{
+    border-left: solid 2px #10ff00;
+    background-color: darkgrey;
+    color: white;
+    border-radius: 0px;
+}
+.btn-striped-success:hover{
+    background-color: grey;
+}
