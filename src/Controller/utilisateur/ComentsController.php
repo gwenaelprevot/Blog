@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\utilisateur;
 
 use App\Controller\AppController;
 
@@ -16,12 +16,22 @@ class ComentsController extends AppController
      *
      * @return \Cake\Network\Response|null
      */
-    public function index()
+    public function index($id= NULL)
     {
         $this->paginate = [
             'contain' => ['Users', 'News']
         ];
-        $coments = $this->paginate($this->Coments);
+        $coments = $this->paginate($this->Coments->find('all')->where(['coments.user_id'=>$id]));
+
+        $this->set(compact('coments'));
+        $this->set('_serialize', ['coments']);
+    }
+    public function indexlike($id= NULL)
+    {
+        $this->paginate = [
+            'contain' => ['Users', 'News']
+        ];
+        $coments = $this->paginate($this->Coments->find('all')->where(['coments.user_id'=>$id])->andWhere(['licke >'=>0]));
 
         $this->set(compact('coments'));
         $this->set('_serialize', ['coments']);

@@ -27,12 +27,13 @@
     <?php foreach ($com as $coms): ?>
         <div class="well">
         <p><?= $coms->content ?></p>
-        <p><?= $coms->has('user') ? $this->Html->link($news->user->username, ['controller' => 'Users', 'action' => 'view', $news->user->id],['class'=>'pull-right']) : '' ?></p>
+        <p class='pull-right'><?= $coms->has('user') ? $news->user->username : '' ?></p>
+        <p><?= $this->Form->postLink(__(''), ['controller'=>'coments', 'action' => 'like', $coms->id], ['class'=>'glyphicon glyphicon-heart pull-right']) ?></p>
         </div>
     <?php endforeach;?>
 
     <div class="com"></div>
 </div>
 <script>
-    $('.com').load('/coments/add/<?= $news->id ?>');
+    $('.com').load('/admin/coments/add/<?= $news->id ?>');
 </script>

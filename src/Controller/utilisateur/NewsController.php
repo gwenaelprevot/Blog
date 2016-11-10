@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\utilisateur;
 
 use App\Controller\AppController;
 
@@ -18,18 +18,18 @@ class NewsController extends AppController
      */
     public function index($id = NULL)
     {
-/*        $users = $this->Auth->User('id');*/
+        $users = $this->Auth->User('id');
 
         $this->paginate = [
             'contain' => ['Users', 'Categories']
         ];
 
-/*        if (isset($id)=== false) {
+        if (isset($id)=== false) {
             $news = $this->paginate($this->News->find('all')->where(['is_active' => '1']));
         } else {
             $news = $this->paginate($this->News->find('all')->where(['user_id' => $users])->andWhere(['is_active' => '0']));
-        }*/
-        $news = $this->paginate($this->News);
+        }
+/*        $news = $this->paginate($this->News);*/
         $this->set(compact('news'));
         $this->set('_serialize', ['news']);
     }

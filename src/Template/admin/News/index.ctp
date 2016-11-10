@@ -1,6 +1,6 @@
 <div class="news index large-9 medium-8 columns content">
     <h3><?= __('News') ?></h3>
-    <table class="table table-responsive">
+    <table class="table table-inverse">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>

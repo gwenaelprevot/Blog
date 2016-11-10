@@ -80,3 +80,22 @@ Router::scope('/', function (RouteBuilder $routes) {
  * how to customize the loading of plugin routes.
  */
 Plugin::routes();
+//Route Admin
+Router::prefix('admin', function ($routes) {
+    $routes->connect('/news', ['controller' => 'News', 'action' => 'index']);
+    $routes->connect('/news/ajout', ['controller' => 'News', 'action' => 'add']);
+    $routes->connect('/users', ['controller' => 'users', 'action' => 'index']);
+    $routes->connect('/users/ajout', ['controller' => 'users', 'action' => 'add']);
+    $routes->connect('/Categories', ['controller' => 'Categories', 'action' => 'index']);
+    $routes->connect('/Categories/ajout', ['controller' => 'Categories', 'action' => 'add']);
+    $routes->connect('/coments', ['controller' => 'coments', 'action' => 'index']);
+    $routes->connect('/coments/ajout', ['controller' => 'coments', 'action' => 'add']);
+    $routes->fallbacks(DashedRoute::class);
+});
+Router::prefix('utilisateur', function ($routes) {
+    $routes->connect('/news', ['controller' => 'News', 'action' => 'index']);
+    $routes->connect('/news/ajout', ['controller' => 'News', 'action' => 'add']);
+    $routes->connect('/users/ajout', ['controller' => 'users', 'action' => 'add']);
+    $routes->connect('/coments/ajout', ['controller' => 'coments', 'action' => 'add']);
+    $routes->fallbacks(DashedRoute::class);
+});
