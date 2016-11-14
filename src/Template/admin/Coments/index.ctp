@@ -1,7 +1,7 @@
 
 <div class="coments index large-9 medium-8 columns content">
-    <h3><?= __('Coments') ?></h3>
-    <table class="table table-inverse">
+    <h3><?= __('Tout Mes Commentaire') ?></h3>
+    <table class="table table-responsive">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>

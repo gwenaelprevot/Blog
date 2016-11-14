@@ -16,12 +16,33 @@ class ComentsController extends AppController
      *
      * @return \Cake\Network\Response|null
      */
-    public function index()
+    public function index($id= NULL)
     {
         $this->paginate = [
             'contain' => ['Users', 'News']
         ];
-        $coments = $this->paginate($this->Coments);
+        $coments = $this->paginate($this->Coments->find('all')->where(['Coments.user_id'=>$id]));
+
+        $this->set(compact('coments'));
+        $this->set('_serialize', ['coments']);
+    }
+
+    public function indexlike($id= NULL)
+    {
+        $this->paginate = [
+            'contain' => ['Users', 'News']
+        ];
+        $coments = $this->paginate($this->Coments->find('all')->innerJoinWith('Likes')->where(['Likes.user_id'=>$id]));
+
+        $this->set(compact('coments'));
+        $this->set('_serialize', ['coments']);
+    }
+    public function indexilike($id= NULL)
+    {
+        $this->paginate = [
+            'contain' => ['Users', 'News']
+        ];
+        $coments = $this->paginate($this->Coments->find('all')->innerJoinWith('Likes')->where(['Coments.user_id'=>$id])->andWhere(['Likes.id IS NOT NULL']));
 
         $this->set(compact('coments'));
         $this->set('_serialize', ['coments']);
@@ -117,19 +138,4 @@ class ComentsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    public function like($id = null)
-    {
-        $users = $this->Auth->User('id');
-
-        $Coments = $this->Coments->get($id, [
-            'contain' => []
-        ]);
-        $licke = $Coments->licke + 1;
-
-        $Coments = $this->Coments->patchEntity($Coments, $this->request->data);
-        $Coments->licke = $licke ;
-        if ($this->Coments->save($Coments)){
-            return $this->redirect($this->referer());
-        }
-    }
 }

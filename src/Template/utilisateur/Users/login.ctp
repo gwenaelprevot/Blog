@@ -11,6 +11,25 @@
     <br>
     <?= $this->Form->button(__('Se Connecter'),['class'=>'btn btn-primary pull-right']); ?>
     <?= $this->Form->end() ?>
-    <?= $this->Html->link("S'inscrire",['controller'=>'users','action'=>'add'],['class'=>'btn btn-primary']); ?>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">S'inscrire</button>
 </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">S'inscrire</h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+    <script>$('.modal-body').load('/utilisateur/users/add')</script>
 </div>

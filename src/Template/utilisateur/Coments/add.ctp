@@ -1,10 +1,10 @@
     <?= $this->Form->create($coment) ?>
     <fieldset>
-        <legend><?= __('Add Coment') ?></legend>
+        <legend><?= __('Ajouter Comentaire') ?></legend>
         <?php
-            echo $this->Form->input('content',['class'=>'form-control']);
+            echo $this->Form->input('content',['class'=>'form-control','id'=>'trumbowyg-demo']);
         ?>
     </fieldset>
     <br>
-    <?= $this->Form->button(__('Submit'),['class'=>'btn btn-primary pull-right']) ?>
+    <?= $this->Form->button(__('Submit'),['class'=>'btn btn-striped-primary pull-right']) ?>
     <?= $this->Form->end() ?>

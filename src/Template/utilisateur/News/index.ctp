@@ -1,7 +1,20 @@
-<?php foreach ($news as $news): ?>
-    <div class="jumbotron col-md-12 col-sm-12">
-        <h1><?= h($news->title) ?></h1>
+<?php foreach ($new as $news): ?>
 
+    <?php
+    $c = 0;
+    foreach ($news->user as $user): ?>
+        <?= $user->id ?>
+        <?php foreach ($user->coment as $coments):$c++; ?>
+            <?= $coments->id . 'a' ?>
+
+        <?php endforeach; ?>
+    <?php endforeach; ?>
+    <div class="jumbotron col-md-12 col-sm-12">
+
+        <p class="pull-right label label-warning">
+            <small><?= $news->has('category') ? $news->category->name : ''; ?></small>
+        </p>
+        <h1><?= h($news->title) ?></h1>
         <p><?=
             $this->Text->truncate(
                 $news->content,
@@ -11,10 +24,10 @@
                     'exact' => false
                 ]
             ); ?></p>
-        <p><small><?= $news->has('category') ? $news->category->name :'' ?>
-                    <?= $news->is_active ? __('Oui') : __('Non'); ?></small>
-                    <?= $news->has('user') ? $news->user->username : '' ?></p>
-        <p><a class="btn btn-primary btn-lg pull-right" href="<?= $this->Url->build(['action' => 'view', $news->id]) ?>" role="button">Lire Plus</a></p>
+        <b>Auteur :</b>
+        <small class="label label-success"><?= $news->has('user') ? $news->user->username : '' ?></small>
+        <p><a class="btn btn-striped-primary btn-lg pull-right"
+              href="<?= $this->Url->build(['action' => 'view', $news->id]) ?>" role="button">Lire Plus</a></p>
     </div>
 <?php endforeach; ?>
 <div class="row">

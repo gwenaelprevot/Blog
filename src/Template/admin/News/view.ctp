@@ -1,39 +1,52 @@
-<div class="news view large-9 medium-8 columns content">
-    <legend><?= h($news->title) ?></legend>
-    <table class="vertical-table">
-        <tr>
-            <th scope="row"><?= __('Title: ') ?></th>
-            <td><?= h($news->title) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('User: ') ?></th>
-            <td><?= $news->has('user') ? $this->Html->link($news->user->id, ['controller' => 'Users', 'action' => 'view', $news->user->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Category: ') ?></th>
-            <td><?= $news->has('category') ? $this->Html->link($news->category->name, ['controller' => 'Categories', 'action' => 'view', $news->category->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Is Active: ') ?></th>
-            <td><?= $news->is_active ? __('Oui'):__('Non'); ?></td>
-        </tr>
-    </table>
-    <div class="row">
-        <h4><?= __('Content') ?></h4>
-        <?= $this->Text->autoParagraph(h($news->content)); ?>
-    </div>
+<?php if (!empty($this->request->session()->read('Auth'))): ?>
+    <?php if ($this->request->session()->read('Auth')['User']['id'] === $news->user_id): ?>
+        <legend><?= h($news->title) ?>
+            <?= $this->Html->link(__('Edit News'), ['action' => 'edit', $news->id], ['class' => 'btn btn-striped-success']) ?>
+            <?= $this->Form->postLink(__('Delete News'), ['action' => 'delete', $news->id], ['confirm' => __('Are you sure you want to delete # {0}?', $news->id), 'class' => 'btn btn-striped-danger']) ?>
+        </legend>
+    <?php endif; ?>
+<?php endif; ?>
+<h2><?= h($news->title) ?></h2>
+<p class="pull-right"><b><?= 'Categorie: ' ?></b><span class="label label-warning"><?= $news->has('category') ? h($news->category->name) : '' ?></span></p>
+<hr>
+<div class="row">
+    <?= $this->Text->autoParagraph(h($news->content)); ?>
+    <p class="pull-right">
+        <b><?= 'Auteur: ' ?></b><span class="label label-success"> <?= $news->has('user') ? $news->user->username : '' ?></span>
+    </p>
     <legend>Comentaire</legend>
 
     <?php foreach ($com as $coms): ?>
         <div class="well">
-        <p><?= $coms->content ?></p>
-        <p class='pull-right'><?= $coms->has('user') ? $news->user->username : '' ?></p>
-        <p><?= $this->Form->postLink(__(''), ['controller'=>'coments', 'action' => 'like', $coms->id], ['class'=>'glyphicon glyphicon-heart pull-right']) ?></p>
+            <p><?= $this->Form->postLink(__(''), ['controller' => 'likes', 'action' => 'add', $coms->id,'prefix'=>false], ['class' => 'glyphicon glyphicon-heart pull-right like']) ?></p>
+            <p><?= $coms->content ?></p>
+            <span class="label label-success">
+                <?= $coms->has('user') ? $coms->user->username : '' ?>
+            </span>
         </div>
-    <?php endforeach;?>
+
+    <?php endforeach; ?>
 
     <div class="com"></div>
 </div>
+<?= $this->Html->script('trumbowyg.min.js') ?>
+<?= $this->Html->script('langs/fr.min.js') ?>
+<?= $this->Html->css('trumbowyg.min.css') ?>
 <script>
     $('.com').load('/admin/coments/add/<?= $news->id ?>');
+
+    function explode() {
+        $('#trumbowyg-demo').trumbowyg({
+            lang: 'fr',
+            btns: [
+                ['formatting'],
+                'btnGrp-semantic',
+                ['link'],
+                'btnGrp-justify',
+                'btnGrp-lists',
+                ['horizontalRule']
+            ]
+        })
+    }
+    setTimeout(explode, 1000)
 </script>

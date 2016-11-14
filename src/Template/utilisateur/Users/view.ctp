@@ -18,9 +18,5 @@
             <b><?= __('Mail') ?></b>
             <?= h($user->mail) ?>
         </p>
-        <p>
-            <b><?= __('Id') ?></b>
-            <?= $this->Number->format($user->id) ?>
-        </p>
     </div>
 </div>

@@ -66,10 +66,16 @@ class UsersController extends AppController
             $this->request->data['avatar'] = $picture;
 
             $user = $this->Users->patchEntity($user, $this->request->data);
-            $this->Users->save($user);
+            if ($this->Users->save($user)){
 
+                $this->Flash->success(__('Bravo Vous etes inscris'));
 
-            return $this->redirect(['action' => 'view',$user->id]);
+                return $this->redirect($this->referer());
+
+            }else{
+                return $this->redirect($this->referer());
+            }
+
 
         }
 

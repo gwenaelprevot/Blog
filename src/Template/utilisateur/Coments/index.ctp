@@ -1,6 +1,6 @@
 
 <div class="coments index large-9 medium-8 columns content">
-    <h3><?= __('Coments') ?></h3>
+    <h3><?= __('Tout Mes Commentaire') ?></h3>
     <table class="table table-responsive">
         <thead>
             <tr>
@@ -14,7 +14,7 @@
             <?php foreach ($coments as $coment): ?>
             <tr>
                 <td><?= $this->Number->format($coment->id) ?></td>
-                <td><?= $coment->has('user') ? $this->Html->link($coment->user->username, ['controller' => 'Users', 'action' => 'view', $coment->user->id]) : '' ?></td>
+                <td><?= $coment->has('user') ? $coment->user->username : '' ?></td>
                 <td><?= $coment->has('news') ? $this->Html->link($coment->news->title, ['controller' => 'News', 'action' => 'view', $coment->news->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $coment->id]) ?>

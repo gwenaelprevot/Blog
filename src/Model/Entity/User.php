@@ -4,16 +4,21 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 use Cake\Auth\DefaultPasswordHasher;
 
+
 /**
  * User Entity
  *
  * @property int $id
  * @property string $firstname
  * @property string $lastname
- * @property bool $is_admin
+ * @property string $username
+ * @property int $is_admin
  * @property string $password
  * @property string $avatar
  * @property string $mail
+ *
+ * @property \App\Model\Entity\Coment[] $coments
+ * @property \App\Model\Entity\News[] $news
  */
 class User extends Entity
 {

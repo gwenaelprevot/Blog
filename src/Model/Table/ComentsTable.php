@@ -11,6 +11,7 @@ use Cake\Validation\Validator;
  *
  * @property \Cake\ORM\Association\BelongsTo $Users
  * @property \Cake\ORM\Association\BelongsTo $News
+ * @property \Cake\ORM\Association\HasMany $Likes
  *
  * @method \App\Model\Entity\Coment get($primaryKey, $options = [])
  * @method \App\Model\Entity\Coment newEntity($data = null, array $options = [])
@@ -38,12 +39,13 @@ class ComentsTable extends Table
         $this->primaryKey('id');
 
         $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'user_id'
         ]);
         $this->belongsTo('News', [
-            'foreignKey' => 'new_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'new_id'
+        ]);
+        $this->hasMany('Likes', [
+            'foreignKey' => 'coment_id'
         ]);
     }
 
@@ -60,8 +62,7 @@ class ComentsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('content', 'create')
-            ->notEmpty('content');
+            ->allowEmpty('content');
 
         return $validator;
     }

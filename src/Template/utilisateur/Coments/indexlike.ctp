@@ -1,12 +1,13 @@
 
 <div class="coments index large-9 medium-8 columns content">
-    <h3><?= __('Coments') ?></h3>
+    <h3><?= __('Les Commentaire Que j\'ai Like') ?></h3>
     <table class="table table-responsive">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('new_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Numero') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Utilisateur') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Contenu') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Article') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -14,13 +15,16 @@
             <?php foreach ($coments as $coment): ?>
             <tr>
                 <td><?= $this->Number->format($coment->id) ?></td>
-                <td><?= $coment->has('user') ? $this->Html->link($coment->user->username, ['controller' => 'Users', 'action' => 'view', $coment->user->id]) : '' ?></td>
+                <td><?= $coment->has('user') ? $coment->user->username : '' ?></td>
+                <td><?= $coment->content?></td>
                 <td><?= $coment->has('news') ? $this->Html->link($coment->news->title, ['controller' => 'News', 'action' => 'view', $coment->news->id]) : '' ?></td>
+                <?php if ($coment->user_id === 2 ):?>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $coment->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $coment->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $coment->id], ['confirm' => __('Are you sure you want to delete # {0}?', $coment->id)]) ?>
                 </td>
+                <?php endif; ?>
             </tr>
             <?php endforeach; ?>
         </tbody>

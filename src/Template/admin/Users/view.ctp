@@ -7,6 +7,10 @@
     <div class="container" style="text-align: center;">
     <img src="/upload/user/<?= h($user->avatar) ?>" class="col-md-4">
         <p>
+            <b><?= __('Id') ?></b>
+            <?= $this->Number->format($user->id) ?>
+        </p>
+        <p>
             <b><?= __('Firstname') ?></b>
             <?= h($user->firstname) ?>
         </p>
@@ -17,10 +21,6 @@
         <p>
             <b><?= __('Mail') ?></b>
             <?= h($user->mail) ?>
-        </p>
-        <p>
-            <b><?= __('Id') ?></b>
-            <?= $this->Number->format($user->id) ?>
         </p>
         <p>
             <b><?= __('Is Admin') ?></b>

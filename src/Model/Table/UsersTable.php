@@ -9,6 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Users Model
  *
+ * @property \Cake\ORM\Association\HasMany $Coments
  * @property \Cake\ORM\Association\HasMany $News
  *
  * @method \App\Model\Entity\User get($primaryKey, $options = [])
@@ -36,6 +37,9 @@ class UsersTable extends Table
         $this->displayField('id');
         $this->primaryKey('id');
 
+        $this->hasMany('Coments', [
+            'foreignKey' => 'user_id'
+        ]);
         $this->hasMany('News', [
             'foreignKey' => 'user_id'
         ]);
@@ -54,30 +58,41 @@ class UsersTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('firstname', 'create')
-            ->notEmpty('firstname');
+            ->allowEmpty('firstname');
 
         $validator
-            ->requirePresence('lastname', 'create')
-            ->notEmpty('lastname');
+            ->allowEmpty('lastname');
 
         $validator
-            ->boolean('is_admin')
-            ->requirePresence('is_admin', 'create')
-            ->notEmpty('is_admin');
+            ->allowEmpty('username');
 
         $validator
-            ->requirePresence('password', 'create')
-            ->notEmpty('password');
+            ->integer('is_admin')
+            ->allowEmpty('is_admin');
 
         $validator
-            ->requirePresence('avatar', 'create')
-            ->notEmpty('avatar');
+            ->allowEmpty('password');
 
         $validator
-            ->requirePresence('mail', 'create')
-            ->notEmpty('mail');
+            ->allowEmpty('avatar');
+
+        $validator
+            ->allowEmpty('mail');
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->isUnique(['username']));
+
+        return $rules;
     }
 }

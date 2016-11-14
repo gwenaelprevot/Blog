@@ -21,21 +21,34 @@ class ComentsController extends AppController
         $this->paginate = [
             'contain' => ['Users', 'News']
         ];
-        $coments = $this->paginate($this->Coments->find('all')->where(['coments.user_id'=>$id]));
+        $coments = $this->paginate($this->Coments->find('all')->where(['Coments.user_id'=>$id]));
 
         $this->set(compact('coments'));
         $this->set('_serialize', ['coments']);
     }
+
     public function indexlike($id= NULL)
     {
         $this->paginate = [
             'contain' => ['Users', 'News']
         ];
-        $coments = $this->paginate($this->Coments->find('all')->where(['coments.user_id'=>$id])->andWhere(['licke >'=>0]));
+        $coments = $this->paginate($this->Coments->find('all')->innerJoinWith('Likes')->where(['Likes.user_id'=>$id]));
 
         $this->set(compact('coments'));
         $this->set('_serialize', ['coments']);
     }
+    public function indexilike($id= NULL)
+    {
+        $this->paginate = [
+            'contain' => ['Users', 'News']
+        ];
+        $coments = $this->paginate($this->Coments->find('all')->innerJoinWith('Likes')->where(['Coments.user_id'=>$id])->andWhere(['Likes.id IS NOT NULL']));
+
+        $this->set(compact('coments'));
+        $this->set('_serialize', ['coments']);
+    }
+
+
 
     /**
      * View method

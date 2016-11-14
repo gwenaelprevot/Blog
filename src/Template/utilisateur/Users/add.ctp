@@ -1,7 +1,6 @@
 <div class="news form large-9 medium-8 columns content">
 <?= $this->Form->create($user,['enctype' => 'multipart/form-data']) ?>
     <fieldset>
-        <legend><?= __('Ajout Utilisateur') ?></legend>
         <?php
             echo $this->Form->input('firstname',['class'=>'form-control','label'=>'Prenom']);
             echo $this->Form->input('lastname',['class'=>'form-control','label'=>'Nom']);
@@ -14,6 +13,7 @@
             echo $this->Form->input('mail',['class'=>'form-control','label'=>'Email']);
         ?>
     </fieldset>
+    <br>
     <?= $this->Form->button(__('Submit'),['class'=>'btn btn-primary pull-right']) ?>
     <?= $this->Form->end() ?>
 </div>
@@ -22,7 +22,7 @@
         margin: 10px;
         width:130px;
         height: 130px;
-        border: dotted 2px black;
+        border: dotted 1px black;
     }
 </style>
 <script>
