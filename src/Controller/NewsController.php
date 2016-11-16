@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller\utilisateur;
+namespace App\Controller;
 
 use App\Controller\AppController;
 
@@ -18,14 +18,22 @@ class NewsController extends AppController
      */
     public function index($id = NULL)
     {
+        $this->loadModel('Category');
 
         $this->paginate = [
-            'contain' => ['Users', 'Categories']
+            'limit' =>4,
+            'contain' => ['Users', 'Category','Coments']
         ];
 
+/*        $new = $this->paginate($this->News->find('all')->contain('Category')->where(['is_active' => '1']));*/
+        if (isset($id)=== false) {
             $new = $this->paginate($this->News->find('all')->where(['is_active' => '1']));
+        } else {
+            $new = $this->paginate($this->News->find('all')->where(['categorie_id' => $id])->andWhere(['is_active' => '1']));
+        }
+        $category = $this->Category->find('all');
 
-        $this->set(compact('new'));
+        $this->set(compact('new','category'));
         $this->set('_serialize', ['news']);
     }
 
@@ -40,7 +48,7 @@ class NewsController extends AppController
     {
         $this->loadModel('Coments');
         $news = $this->News->get($id, [
-            'contain' => ['Users', 'Categories']
+            'contain' => ['Users', 'Category']
         ]);
         $com = $this->Coments->find('all')->contain('Users')->where(['new_id'=> $id]);
         $this->set('news', $news);
@@ -108,6 +116,7 @@ class NewsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $news = $this->News->get($id);
+        $this->News->Coments->deleteAll(['new_id'=>$id]);
         if ($this->News->delete($news)) {
             $this->Flash->success(__('The news has been deleted.'));
         } else {

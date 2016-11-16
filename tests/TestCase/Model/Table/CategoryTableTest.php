@@ -1,22 +1,22 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\CategoriesTable;
+use App\Model\Table\CategoryTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\CategoriesTable Test Case
+ * App\Model\Table\CategoryTable Test Case
  */
-class CategoriesTableTest extends TestCase
+class CategoryTableTest extends TestCase
 {
 
     /**
      * Test subject
      *
-     * @var \App\Model\Table\CategoriesTable
+     * @var \App\Model\Table\CategoryTable
      */
-    public $Categories;
+    public $Category;
 
     /**
      * Fixtures
@@ -24,7 +24,7 @@ class CategoriesTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.categories'
+        'app.category'
     ];
 
     /**
@@ -35,8 +35,8 @@ class CategoriesTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Category') ? [] : ['className' => 'App\Model\Table\CategoriesTable'];
-        $this->Categories = TableRegistry::get('Category', $config);
+        $config = TableRegistry::exists('Category') ? [] : ['className' => 'App\Model\Table\CategoryTable'];
+        $this->Category = TableRegistry::get('Category', $config);
     }
 
     /**
@@ -46,7 +46,7 @@ class CategoriesTableTest extends TestCase
      */
     public function tearDown()
     {
-        unset($this->Categories);
+        unset($this->Category);
 
         parent::tearDown();
     }

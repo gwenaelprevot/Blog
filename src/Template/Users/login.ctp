@@ -31,5 +31,5 @@
             </div>
         </div>
     </div>
-    <script>$('.modal-body').load('/utilisateur/users/add')</script>
+    <script>$('.modal-body').load('/users/add')</script>
 </div>

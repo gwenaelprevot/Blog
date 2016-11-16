@@ -18,18 +18,18 @@ class NewsController extends AppController
      */
     public function index($id = NULL)
     {
-/*        $users = $this->Auth->User('id');*/
+        $users = $this->Auth->User('id');
 
         $this->paginate = [
-            'contain' => ['Users', 'Categories']
+            'contain' => ['Users', 'Category','Coments']
         ];
 
-/*        if (isset($id)=== false) {
+        if (isset($id)=== false) {
             $news = $this->paginate($this->News->find('all')->where(['is_active' => '1']));
         } else {
             $news = $this->paginate($this->News->find('all')->where(['user_id' => $users])->andWhere(['is_active' => '0']));
-        }*/
-        $news = $this->paginate($this->News);
+        }
+/*        $news = $this->paginate($this->News);*/
         $this->set(compact('news'));
         $this->set('_serialize', ['news']);
     }
@@ -45,7 +45,7 @@ class NewsController extends AppController
     {
         $this->loadModel('Coments');
         $news = $this->News->get($id, [
-            'contain' => ['Users', 'Categories']
+            'contain' => ['Users', 'Category']
         ]);
         $com = $this->Coments->find('all')->contain('Users')->where(['new_id'=> $id]);
         $this->set('news', $news);
@@ -71,7 +71,7 @@ class NewsController extends AppController
             }
         }
         $users = $this->News->Users->find('list', ['valueField' => 'username']);
-        $categories = $this->News->Categories->find('list', ['valueField' => 'name']);
+        $categories = $this->News->Category->find('list', ['valueField' => 'name']);
         $this->set(compact('news', 'users', 'categories'));
         $this->set('_serialize', ['news']);
     }
@@ -97,7 +97,7 @@ class NewsController extends AppController
             }
         }
         $users = $this->News->Users->find('list', ['limit' => 200]);
-        $categories = $this->News->Categories->find('list', ['limit' => 200]);
+        $categories = $this->News->Category->find('list', ['limit' => 200]);
         $this->set(compact('news', 'users', 'categories'));
         $this->set('_serialize', ['news']);
     }
@@ -113,6 +113,7 @@ class NewsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $news = $this->News->get($id);
+        $this->News->Coments->deleteAll(['new_id'=>$id]);
         if ($this->News->delete($news)) {
             $this->Flash->success(__('The news has been deleted.'));
         } else {

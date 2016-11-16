@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller\utilisateur;
+namespace App\Controller;
 
 use App\Controller\AppController;
 
@@ -129,6 +129,7 @@ class ComentsController extends AppController
      */
     public function delete($id = null)
     {
+        $users = $this->Auth->User('id');
         $this->request->allowMethod(['post', 'delete']);
         $coment = $this->Coments->get($id);
         if ($this->Coments->delete($coment)) {

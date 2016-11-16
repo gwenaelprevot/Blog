@@ -1,5 +1,6 @@
 <div class="news index large-9 medium-8 columns content">
     <h3><?= __('News') ?></h3>
+    <a class="btn btn-striped-primary" href="<?= $this->Url->Build(['action'=>'index','prefix'=> false]) ?>">Mode Utilisateur</a>
     <table class="table table-inverse">
         <thead>
             <tr>
@@ -7,6 +8,7 @@
                 <th scope="col"><?= $this->Paginator->sort('title') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('categorie_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Nombre de Comentaire') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('is_active') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -17,7 +19,8 @@
                 <td><?= $this->Number->format($news->id) ?></td>
                 <td><?= h($news->title) ?></td>
                 <td><?= $news->has('user') ? $this->Html->link($news->user->username, ['controller' => 'Users', 'action' => 'view', $news->user->id]) : '' ?></td>
-                <td><?= $news->has('category') ? $this->Html->link($news->category->name, ['controller' => 'Categories', 'action' => 'view', $news->category->id]) : '' ?></td>
+                <td><?= $news->has('category') ? $this->Html->link($news->category->name, ['controller' => 'Category', 'action' => 'view', $news->category->id]) : '' ?></td>
+                <td><?= count($news->coments) ?></td>
                 <td><?= $news->is_active ? __('Oui'):__('Non') ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $news->id]) ?>

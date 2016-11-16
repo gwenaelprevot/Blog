@@ -40,9 +40,8 @@
 
 
 </head>
-<body style="padding-top: 70px;" }>
-<?php $prefix = 'utilisateur' ?>
-<?php if (!empty($this->request->session()->read('Auth'))): ?>
+<body style="padding-top: 90px;">
+<?php if (isset($this->request->session()->read('Auth')['User']['id'])): ?>
     <?php if ($this->request->session()->read('Auth')['User']['is_admin'] === 1): ?>
         <?php $prefix = 'admin' ?>
         <nav class="navbar navbar-inverse navbar-fixed-top" data-topbar role="navigation">
@@ -78,8 +77,8 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">Category <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><?= $this->Html->link('Category', ['controller' => 'categories', 'action' => 'index', 'prefix' => $prefix]) ?></li>
-                                <li><?= $this->Html->link('Ajouter Category', ['controller' => 'categories', 'action' => 'add', 'prefix' => $prefix]) ?></li>
+                                <li><?= $this->Html->link('Category', ['controller' => 'category', 'action' => 'index', 'prefix' => $prefix]) ?></li>
+                                <li><?= $this->Html->link('Ajouter Category', ['controller' => 'category', 'action' => 'add', 'prefix' => $prefix]) ?></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -102,23 +101,28 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-haspopup="true"
-                                   aria-expanded="false"><?= $this->request->session()->read('Auth')['User']['username'] ?>
+                                   aria-expanded="false">
+                                    <img
+                                        src="/upload/user/<?= $this->request->session()->read('Auth')['User']['avatar'] ?>"
+                                        width="50px" height="50px" style="border-radius: 100%">
+                                    <?= $this->request->session()->read('Auth')['User']['username'] ?>
                                     <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'view', $this->request->session()->read('Auth')['User']['id']]) ?>">Mon
+                                        <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'view', $this->request->session()->read('Auth')['User']['id'], 'prefix' => $prefix]) ?>">Mon
                                             Compte</a></li>
                                     <li>
-                                        <a href="<?= $this->Url->build(['controller' => 'news', 'action' => 'index', $this->request->session()->read('Auth')['User']['id']]) ?>">Mes
+                                        <a href="<?= $this->Url->build(['controller' => 'news', 'action' => 'index', $this->request->session()->read('Auth')['User']['id'], 'prefix' => $prefix]) ?>">Mes
                                             Brouillon</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li>
-                                        <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'logout']) ?>">Logout</a>
+                                        <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'logout', 'prefix' => false]) ?>">Logout</a>
                                     </li>
                                 </ul>
                             </li>
                         <?php else: ?>
-                            <li><a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'logout']) ?>">Connexion</a>
+                            <li>
+                                <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'logout', 'prefix' => $prefix]) ?>">Connexion</a>
                             </li>
                         <?php endif; ?>
                     </ul>
@@ -139,14 +143,14 @@
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><?= $this->Html->link('News', ['controller' => 'news', 'action' => 'index', 'prefix' => $prefix]) ?></li>
+                        <li><?= $this->Html->link('News', ['controller' => 'news', 'action' => 'index', 'prefix' => false]) ?></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">Mes comentaire <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><?= $this->Html->link('Tout mes comentaire', ['controller' => 'coments', 'action' => 'index', $this->request->session()->read('Auth')['User']['id'], 'prefix' => $prefix]) ?></li>
-                                <li><?= $this->Html->link('Mes comentaire que j\'ais Liker', ['controller' => 'coments', 'action' => 'indexlike', $this->request->session()->read('Auth')['User']['id'], 'prefix' => $prefix]) ?></li>
-                                <li><?= $this->Html->link('Mes comentaire Liker', ['controller' => 'coments', 'action' => 'indexilike', $this->request->session()->read('Auth')['User']['id'], 'prefix' => $prefix]) ?></li>
+                                <li><?= $this->Html->link('Tout mes comentaire', ['controller' => 'coments', 'action' => 'index', $this->request->session()->read('Auth')['User']['id'], 'prefix' => false]) ?></li>
+                                <li><?= $this->Html->link('Mes comentaire que j\'ais Liker', ['controller' => 'coments', 'action' => 'indexlike', $this->request->session()->read('Auth')['User']['id'], 'prefix' => false]) ?></li>
+                                <li><?= $this->Html->link('Mes comentaire Liker', ['controller' => 'coments', 'action' => 'indexilike', $this->request->session()->read('Auth')['User']['id'], 'prefix' => false]) ?></li>
                             </ul>
                         </li>
                     </ul>
@@ -156,7 +160,11 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-haspopup="true"
-                                   aria-expanded="false"><?= $this->request->session()->read('Auth')['User']['username'] ?>
+                                   aria-expanded="false">
+                                    <img
+                                        src="/upload/user/<?= $this->request->session()->read('Auth')['User']['avatar'] ?>"
+                                        width="50px" height="50px" style="border-radius: 100%">
+                                    <?= $this->request->session()->read('Auth')['User']['username'] ?>
                                     <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li>
@@ -177,7 +185,7 @@
             </div>
         </nav>
     <?php endif; ?>
-<?php elseif (empty($this->request->session()->read('Auth')) === true): ?>
+<?php else: ?>
     <nav class="navbar navbar-inverse navbar-fixed-top" data-topbar role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -191,10 +199,11 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><?= $this->Html->link('News', ['controller' => 'news', 'action' => 'index', 'prefix' => $prefix]) ?></li>
+                    <li><?= $this->Html->link('News', ['controller' => 'news', 'action' => 'index', 'prefix' => false]) ?></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'login']) ?>">Connexion</a>
+                    <li>
+                        <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'login', 'prefix' => false]) ?>">Connexion</a>
                     </li>
                 </ul>
             </div>
@@ -212,7 +221,7 @@
     menu = $('.navbar');
     $('#bleu').click('on', function () {
         menu.removeClass('navbar-inverse');
-        menu.addClass('navbar-bleu');
+        menu.addClass('navbar-bleu').fadeIn(1000);
         menu.removeClass('navbar-brun');
         menu.removeClass('navbar-vert');
         $('#li-bleu').addClass('active');

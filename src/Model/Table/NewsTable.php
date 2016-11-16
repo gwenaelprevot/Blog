@@ -10,7 +10,7 @@ use Cake\Validation\Validator;
  * News Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Users
- * @property \Cake\ORM\Association\BelongsTo $Categories
+ * @property \Cake\ORM\Association\BelongsTo $Category
  *
  * @method \App\Model\Entity\News get($primaryKey, $options = [])
  * @method \App\Model\Entity\News newEntity($data = null, array $options = [])
@@ -38,12 +38,13 @@ class NewsTable extends Table
         $this->primaryKey('id');
 
         $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'user_id'
         ]);
-        $this->belongsTo('Categories', [
-            'foreignKey' => 'categorie_id',
-            'joinType' => 'INNER'
+        $this->belongsTo('Category', [
+            'foreignKey' => 'categorie_id'
+        ]);
+        $this->hasMany('Coments',[
+            'foreignKey'=>'new_id'
         ]);
     }
 
@@ -60,17 +61,14 @@ class NewsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('title', 'create')
-            ->notEmpty('title');
+            ->allowEmpty('title');
 
         $validator
-            ->requirePresence('content', 'create')
-            ->notEmpty('content');
+            ->allowEmpty('content');
 
         $validator
             ->integer('is_active')
-            ->requirePresence('is_active', 'create')
-            ->notEmpty('is_active');
+            ->allowEmpty('is_active');
 
         return $validator;
     }
@@ -85,7 +83,7 @@ class NewsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
-        $rules->add($rules->existsIn(['categorie_id'], 'Categories'));
+        $rules->add($rules->existsIn(['categorie_id'], 'Category'));
 
         return $rules;
     }

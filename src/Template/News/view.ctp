@@ -19,9 +19,9 @@
     <?php foreach ($com as $coms): ?>
         <div class="well">
             <?php if (!empty($this->request->session()->read('Auth'))): ?>
-                <?php if ($coms->user_id === $this->request->session()->read('Auth')['User']['id']): ?>
-                    <span id="edit-<?= $coms->id ?>" class="label btn-striped-success">edit</span>
-                <?php endif; ?>
+            <?php if ($coms->user_id === $this->request->session()->read('Auth')['User']['id']): ?>
+            <span id="edit-<?= $coms->id ?>" class="label btn-striped-success">edit</span>
+            <?php endif; ?>
             <?php endif; ?>
             <p><?= $this->Form->postLink(__(''), ['controller' => 'likes', 'action' => 'add', $coms->id, 'prefix' => false], ['class' => 'glyphicon glyphicon-heart pull-right like']) ?></p>
             <p><?= $coms->content ?></p>
@@ -29,9 +29,9 @@
                 <?= $coms->has('user') ? $coms->user->username : '' ?>
             </span>
         </div>
-        <div id="id-<?= $coms->id?>" class="edit-<?= $coms->id?>" style="display: none"></div>
+        <div id="id-<?= $coms->id ?>" class="edit-<?= $coms->id ?>" style="display: none"></div>
         <script>
-            $('#edit-<?= $coms->id?>').on('click',function () {
+            $('#edit-<?= $coms->id?>').on('click', function () {
                 $('#id-<?= $coms->id?>').toggle('show');
             });
             $('.edit-<?= $coms->id?>').load('/admin/coments/edit/<?= $coms->id?>');
@@ -45,5 +45,4 @@
 <?= $this->Html->css('trumbowyg.min.css') ?>
 <script>
     $('.com').load('/admin/coments/add/<?= $news->id ?>');
-    $('.edit').load('/admin/coments/edit/<?= $news->id ?>');
 </script>

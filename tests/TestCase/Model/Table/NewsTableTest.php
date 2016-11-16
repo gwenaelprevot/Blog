@@ -26,6 +26,8 @@ class NewsTableTest extends TestCase
     public $fixtures = [
         'app.news',
         'app.users',
+        'app.coments',
+        'app.likes',
         'app.categories'
     ];
 

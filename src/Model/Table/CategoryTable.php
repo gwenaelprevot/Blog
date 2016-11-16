@@ -7,7 +7,7 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Categories Model
+ * Category Model
  *
  * @method \App\Model\Entity\Category get($primaryKey, $options = [])
  * @method \App\Model\Entity\Category newEntity($data = null, array $options = [])
@@ -17,7 +17,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Category[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Category findOrCreate($search, callable $callback = null)
  */
-class CategoriesTable extends Table
+class CategoryTable extends Table
 {
 
     /**
@@ -30,7 +30,7 @@ class CategoriesTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('categories');
+        $this->table('category');
         $this->displayField('name');
         $this->primaryKey('id');
     }
@@ -48,12 +48,10 @@ class CategoriesTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('name', 'create')
-            ->notEmpty('name');
+            ->allowEmpty('name');
 
         $validator
-            ->requirePresence('description', 'create')
-            ->notEmpty('description');
+            ->allowEmpty('description');
 
         return $validator;
     }
