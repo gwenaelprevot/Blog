@@ -1,3 +1,7 @@
+Presentation et Makette dans le dossier Doc
+
+Journal de bord ici : https://docs.google.com/document/d/1DveHIiTScpDQqMfg-gVqYN5ZtGAH6DEmYpUkn74ms3o/edit?usp=sharing
+
 # CakePHP Application Skeleton
 
 [![Build Status](https://img.shields.io/travis/cakephp/app/master.svg?style=flat-square)](https://travis-ci.org/cakephp/app)
