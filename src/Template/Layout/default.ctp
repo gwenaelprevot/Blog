@@ -30,6 +30,7 @@
     <?= $this->Html->css('bootstrap.min.css') ?>
     <?= $this->Html->css('bootstrap-theme.min.css') ?>
     <?= $this->Html->css('style.css') ?>
+    <?= $this->Html->css('1',['class'=>'nav']) ?>
     <?= $this->Html->script('bootstrap.min.js') ?>
     <?= $this->Html->script('html5.image.preview.min') ?>
     <?= $this->Html->script('jquery.js') ?>
@@ -54,6 +55,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
+                    <a class="navbar-brand" href="/blog">Le Panda</a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
@@ -102,9 +104,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-haspopup="true"
                                    aria-expanded="false">
-                                    <img
-                                        src="/upload/user/<?= $this->request->session()->read('Auth')['User']['avatar'] ?>"
-                                        width="50px" height="50px" style="border-radius: 100%">
+                                    <img class="avatar" src="/blog/webroot/upload/user/<?= $this->request->session()->read('Auth')['User']['avatar'] ?>">
                                     <?= $this->request->session()->read('Auth')['User']['username'] ?>
                                     <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
@@ -140,10 +140,10 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
+                    <a class="navbar-brand" href="/blog">Le Panda</a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><?= $this->Html->link('News', ['controller' => 'news', 'action' => 'index', 'prefix' => false]) ?></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">Mes comentaire <span class="caret"></span></a>
@@ -155,15 +155,12 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <?php $Ses = $this->request->session()->read('Auth');
-                        if (!empty($Ses)): ?>
+                        <?php $Ses = $this->request->session()->read('Auth');if (!empty($Ses)): ?>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-haspopup="true"
                                    aria-expanded="false">
-                                    <img
-                                        src="/upload/user/<?= $this->request->session()->read('Auth')['User']['avatar'] ?>"
-                                        width="50px" height="50px" style="border-radius: 100%">
+                                    <img class="avatar"src="/blog/webroot/upload/user/<?= $this->request->session()->read('Auth')['User']['avatar'] ?>">
                                     <?= $this->request->session()->read('Auth')['User']['username'] ?>
                                     <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
@@ -196,11 +193,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                <a class="navbar-brand" href="/blog">Le Panda</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li><?= $this->Html->link('News', ['controller' => 'news', 'action' => 'index', 'prefix' => false]) ?></li>
-                </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'login', 'prefix' => false]) ?>">Connexion</a>
@@ -218,50 +213,18 @@
 </footer>
 </body>
 <script>
-    menu = $('.navbar');
     $('#bleu').click('on', function () {
-        menu.removeClass('navbar-inverse');
-        menu.addClass('navbar-bleu').fadeIn(1000);
-        menu.removeClass('navbar-brun');
-        menu.removeClass('navbar-vert');
-        $('#li-bleu').addClass('active');
-        $('#li-vert').removeClass('active');
-        $('#li-brun').removeClass('active');
-        $('#li-default').removeClass('active');
-
+        $(".nav").attr("href", "/blog/css/navbar-bleu.css");
     });
     $('#brun').click('on', function () {
-        menu.removeClass('navbar-inverse');
-        menu.removeClass('navbar-bleu');
-        menu.removeClass('navbar-vert');
-        menu.addClass('navbar-brun');
-        $('#li-brun').addClass('active');
-        $('#li-vert').removeClass('active');
-        $('#li-bleu').removeClass('active');
-        $('#li-default').removeClass('active');
-
-
+        $(".nav").attr("href", "/blog/css/navbar-brun.css");
     });
 
     $('#vert').click('on', function () {
-        menu.removeClass('navbar-inverse');
-        menu.removeClass('navbar-bleu');
-        menu.removeClass('navbar-brun');
-        menu.addClass('navbar-vert');
-        $('#li-vert').addClass('active');
-        $('#li-brun').removeClass('active');
-        $('#li-bleu').removeClass('active');
-        $('#li-default').removeClass('active');
+        $(".nav").attr("href", "/blog/css/navbar-vert.css");
     });
     $('#default').click('on', function () {
-        menu.removeClass('navbar-vert');
-        menu.removeClass('navbar-bleu');
-        menu.removeClass('navbar-brun');
-        menu.addClass('navbar-inverse');
-        $('#li-default').addClass('active');
-        $('#li-brun').removeClass('active');
-        $('#li-bleu').removeClass('active');
-        $('#li-vert').removeClass('active');
+        $(".nav").attr("href", "/blog/css/1.css");
     });
 </script>
 

@@ -9,9 +9,9 @@
         <?= $this->Form->input('password',['class'=>'form-control']) ?>
     </fieldset>
     <br>
-    <?= $this->Form->button(__('Se Connecter'),['class'=>'btn btn-primary pull-right']); ?>
+    <?= $this->Form->button(__('Se Connecter'),['class'=>'btn btn-striped-primary pull-right']); ?>
     <?= $this->Form->end() ?>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">S'inscrire</button>
+    <button type="button" class="btn btn-striped-primary" data-toggle="modal" data-target="#myModal">S'inscrire</button>
 </div>
 </div>
 
@@ -31,5 +31,5 @@
             </div>
         </div>
     </div>
-    <script>$('.modal-body').load('/users/add')</script>
+    <script>$('.modal-body').load('/blog/users/add')</script>
 </div>

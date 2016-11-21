@@ -1,4 +1,4 @@
-<legend><?= __('Ajout Utilisateur ') ?><?= $this->Form->postLink(
+<legend><?= __('Modifier Ces Parametre ') ?><?= $this->Form->postLink(
         __('Delete'),
         ['action' => 'delete', $user->id],
         ['confirm' => __('Are you sure you want to delete # {0}?', $user->id),'class'=>'btn btn-striped-danger']
@@ -9,10 +9,9 @@
     <?= $this->Form->create($user,['enctype' => 'multipart/form-data']) ?>
     <fieldset>
         <?php
-        echo $this->Form->input('firstname',['class'=>'form-control','label'=>'Prenom']);
-        echo $this->Form->input('lastname',['class'=>'form-control','label'=>'Nom']);
+        echo $this->Form->input('prenom',['class'=>'form-control','label'=>'Prenom']);
+        echo $this->Form->input('nom',['class'=>'form-control','label'=>'Nom']);
         echo $this->Form->input('username',['class'=>'form-control','label'=>'Pseudo']);
-        echo $this->Form->input('is_admin',['class'=>'checkbox','label'=>'Admin']);
         echo $this->Form->input('password',['class'=>'form-control','label'=>'Mot de pass']);
         echo $this->Form->input('avatar',['label'=>'Avatar','type'=>'file' ]);
         ?>
@@ -22,11 +21,11 @@
         ?>
     </fieldset>
     <br>
-    <?= $this->Form->button(__('Submit'),['class'=>'btn btn-primary pull-right']) ?>
+    <?= $this->Form->button(__('Submit'),['class'=>'btn btn-striped-primary pull-right']) ?>
     <?= $this->Form->end() ?>
 </div>
 <style>
-    img{
+    .thumb-image{
         margin: 10px;
         width:130px;
         height: 130px;

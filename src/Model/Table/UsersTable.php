@@ -78,6 +78,8 @@ class UsersTable extends Table
 
         $validator
             ->allowEmpty('mail');
+        $validator
+            ->allowEmpty('theme');
 
         return $validator;
     }

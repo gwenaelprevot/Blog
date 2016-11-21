@@ -1,7 +1,7 @@
 <legend><?= __('Ajout Utilisateur ') ?><?= $this->Form->postLink(
         __('Delete'),
         ['action' => 'delete', $user->id],
-        ['confirm' => __('Are you sure you want to delete # {0}?', $user->id),'class'=>'btn btn-striped-danger']
+        ['confirm' => __('Etes vous sur de vouloir la suprimer ?'),'class'=>'btn btn-striped-danger']
     )
     ?>
 </legend>

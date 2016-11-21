@@ -17,7 +17,7 @@
             <?php foreach ($users as $user): ?>
             <tr>
                 <td><?= $this->Number->format($user->id) ?></td>
-                <td><img src="/upload/user/<?= h($user->avatar) ?>" width="100" height="100"></td>
+                <td><img src="/blog/webroot/upload/user/<?= h($user->avatar) ?>" width="100" height="100"></td>
                 <td><?= h($user->firstname) ?></td>
                 <td><?= h($user->lastname) ?></td>
                 <td><?= h($user->username) ?></td>
@@ -26,7 +26,7 @@
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Etes vous sur de vouloir la suprimer ?')]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

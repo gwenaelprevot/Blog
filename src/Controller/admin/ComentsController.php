@@ -105,16 +105,16 @@ class ComentsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $coment = $this->Coments->patchEntity($coment, $this->request->data);
             if ($this->Coments->save($coment)) {
-                $this->Flash->success(__('The coment has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect($this->referer());
             } else {
                 $this->Flash->error(__('The coment could not be saved. Please, try again.'));
             }
         }
+        $iid = $id  ;
         $users = $this->Coments->Users->find('list', ['limit' => 200]);
         $news = $this->Coments->News->find('list', ['limit' => 200]);
-        $this->set(compact('coment', 'users', 'news'));
+        $this->set(compact('coment', 'users', 'news','iid'));
         $this->set('_serialize', ['coment']);
     }
 

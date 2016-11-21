@@ -14,7 +14,7 @@
         ?>
     </fieldset>
     <br>
-    <?= $this->Form->button(__('Submit'),['class'=>'btn btn-primary pull-right']) ?>
+    <?= $this->Form->button(__('Submit'),['class'=>'btn btn-striped-primary pull-right']) ?>
     <?= $this->Form->end() ?>
 </div>
 <style>

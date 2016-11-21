@@ -2,7 +2,7 @@
     <?= $this->Form->create($coment) ?>
     <fieldset>
         <?php
-            echo $this->Form->input('content',['class'=>'form-control','label'=>'Edit','id'=>'trumbowyg-demo']);
+            echo $this->Form->input('content',['class'=>'form-control','label'=>'Edit','id'=>'trumbowyg-demo-edit-'.$iid]);
             echo $this->Form->hidden('user_id', ['options' => $users,'class'=>'hidden']);
             echo $this->Form->hidden('new_id', ['options' => $news,'class'=>'hidden']);
         ?>
@@ -13,7 +13,7 @@
 </div>
 <script>
     function explode() {
-        $('#trumbowyg-demo').trumbowyg({
+        $('#trumbowyg-demo-edit-<?= $iid ?>').trumbowyg({
             lang: 'fr',
             btns: [
                 ['formatting'],

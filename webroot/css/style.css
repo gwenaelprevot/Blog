@@ -1,3 +1,59 @@
+.panel-info > .panel-heading {
+    background-image:linear-gradient(10deg, rgba(255, 165, 0, 0.39), rgba(119, 23, 111, 0.38));
+}
+.panel-info{
+    border: none;
+}
+.panel-info > .panel-heading {
+    color: #252525;
+}
+.pagination > li > a {
+  border-radius: 50%;
+    margin: 5px;
+    background-color: purple;
+    color: white;
+    border: none;
+}
+.pagination > li > a:hover {
+    border-radius: 50%;
+    margin: 5px;
+    background-color: orange;
+    color: white;
+}
+.pagination{
+    width: 100%;
+}
+.pagination > .active > a{
+    background-color: orange;
+    color: white;
+    border: none ;
+}
+.prev{
+    background-color: purple;
+    color: white;
+}
+
+.next:hover{
+    background-color: orange;
+    color: white;
+}
+.prev:hover{
+    background-color: orange;
+    color: white;
+}
+
+.next{
+    background-color: purple;
+    color: white;
+}
+.pagination > .disabled > a{
+     background-color: rgba(148, 0, 148, 0.5);
+     color: rgba(255, 165, 0, 0.5);
+ }
+.pagination > .disabled > a:hover{
+    background-color: rgba(148, 0, 148, 0.5);
+    color: rgba(255, 165, 0, 0.5);
+}
 .btn-striped-danger{
     border-left: solid 2px red;
     background-color: darkgrey;
@@ -17,7 +73,7 @@
     background-color: grey;
 }
 .btn-striped-primary{
-    border-left: solid 4px #2c47ff;
+    border-left: solid 4px purple;
     background-color: darkgrey;
     color: white;
     border-radius: 0;
@@ -28,9 +84,16 @@
 .navbar{
      background-image: none;
 }
+.modal-content {
 
+    background-image:linear-gradient(40deg, purple, orange);
+
+}
 .like{
     color: red;
+}
+.trumbowyg-editor p{
+    color: #0f0f0f;
 }
 .like:hover{
     color: red;
@@ -40,10 +103,21 @@
 .label{
     border-radius: 0;
 }
+.label-primary{
+     background-color: purple;
+ }
+.label-primary > small{
+    color: white;
+}
 body{
     background-image: url("https://www.walldevil.com/wallpapers/a79/blurred-gaussian-blur-minimalistic-light-background-wallpaper-wallpapers-images-computer.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
+}
+.avatar{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
 }
 a{
     color: white;
@@ -60,73 +134,7 @@ a{
 .navbar{
     height: 40px;
 }
-.navbar-brun{
-    background-color: #985f0d;
-    animation: brun;
-    animation-duration: 1s;
-}
-.navbar-brun .navbar-nav > li > a {
-    color: black;
-    animation: brun;
-    animation-duration: 1s;
-    text-shadow: none;
-}
-.navbar-vert{
-    background-color: #2d6324;
-    animation: vert;
-    animation-duration: 1s;
-}
-.navbar-vert .navbar-nav > li > a {
-    color: black;
-    animation: vert;
-    animation-duration: 1s;
-    text-shadow: none;
-}
-.active{
-    background-color: lightgray;
-    animation: vert;
-    animation-duration: 1s;
-}
-.navbar-bleu{
-    background-color: #2a6496;
-    animation: bleu;
-    animation-duration:3s;
-}
-.navbar-bleu .navbar-nav > li > a {
-    color: white;
-    animation: bleu;
-    animation-duration: 1s;
-    text-shadow: none;
-}
-@keyframes bleu{
-    from{
-        opacity: 0;
-    }
-    to{
-        opacity: 1;
-    }
-}
-@keyframes vert{
-    from{
-        opacity: 0;
-    }
-    to{
-        opacity: 1;
-    }
-}
 
-@keyframes brun{
-    from{
-        opacity: 0;
-    }
-    to{
-        opacity: 1;
-    }
-}
-
-.active{
-    border:solid 1px red;
-}
 .table {
     background-color: rgba(220, 220, 220, 0.32);
     border-radius: 3px;
@@ -139,6 +147,9 @@ legend{
 }
 label{
     color: white;
+}
+.panel-body label{
+    color: black;
 }
 p{
     color: white;
@@ -162,11 +173,13 @@ h2{
 .category{
     color: white !important;
 }
-.dropdown:hover {
-    background-color: #0f0f0f;
-}
-.dropdown:hover .dropdown-menu {
-    display: block;
+@media screen and (min-width: 200px) and (max-width: 750px) {
+    .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+        background-color: #252525;
+    }
+    .avatar{
+        display: none;
+    }
 }
 .tags{
     margin:5px;
@@ -186,8 +199,8 @@ h2{
 .tags a{
     margin-left:20px;
     padding:0 10px 0 12px;
-    background:#0089e0;
-    color:#fff;
+    background: #ffde13;
+    color: #252525;
     text-decoration:none;
     -moz-border-radius-bottomright:4px;
     -webkit-border-bottom-right-radius:4px;
@@ -204,7 +217,7 @@ h2{
     left:-12px;
     width:0;
     height:0;
-    border-color:transparent #0089e0 transparent transparent;
+    border-color:transparent #ffde13 transparent transparent;
     border-style:solid;
     border-width:12px 12px 12px 0;
 }
@@ -220,9 +233,9 @@ h2{
     -webkit-border-radius:2px;
     border-radius:2px;
     background:#fff;
-    -moz-box-shadow:-1px -1px 2px #004977;
-    -webkit-box-shadow:-1px -1px 2px #004977;
-    box-shadow:-1px -1px 2px #004977;
+    -moz-box-shadow:-1px -1px 2px #dcbc12;
+    -webkit-box-shadow:-1px -1px 2px #dcbc12;
+    box-shadow:-1px -1px 2px #dcbc12;
 }
 .tags a:hover{background:#555;}
 

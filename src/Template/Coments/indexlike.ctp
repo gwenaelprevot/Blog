@@ -18,7 +18,7 @@
                 <td><?= $coment->has('user') ? $coment->user->username : '' ?></td>
                 <td><?= $coment->content?></td>
                 <td><?= $coment->has('news') ? $this->Html->link($coment->news->title, ['controller' => 'News', 'action' => 'view', $coment->news->id]) : '' ?></td>
-                <?php if ($coment->user_id === 2 ):?>
+                <?php if ($coment->user_id === $this->request->session()->read('Auth')['User']['id'] ):?>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller'=>'news', 'action' => 'view', $coment->new_id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $coment->id], ['confirm' => __('Are you sure you want to delete # {0}?', $coment->id)]) ?>
